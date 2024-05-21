@@ -1,5 +1,1 @@
 telebot
-os
-re
-pyrogram
-urlextract
