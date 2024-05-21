@@ -1,4 +1,4 @@
 telebot
-pip install instaloader
-pip install pyrogram
-pip install urlextract
+instaloader
+pyrogram
+urlextract
