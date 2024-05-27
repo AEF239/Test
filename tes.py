@@ -53,7 +53,7 @@ def start_hunting(message):
        else:
         bot.reply_to(message, f" [{j}] ⛔🚫 >> [ {user} ]")
        j += 1
-       time.sleep(5)
+       
 
 
 
