@@ -58,7 +58,7 @@ def start_hunting(message):
             if 'If you have <strong>Telegram</strong>, you can contact <a class="tgme_username_link"' in req.text:
                 bot.send_message(message.chat.id, f"[{j}] ✅ ☑️    >> [ {user} ]")
                 try:
-                    req = requests.post(f'''https://api.telegram.org/bot{TOKEN}/sendMessage?chat_id={message.chat.id}&text=-\n 𝗨𝗦𝗘𝗥 :  @{user} \n @R_A_J_Y -''')
+                    req = requests.post(f'''https://api.telegram.org/bot{TOKEN}/sendMessage?chat_id={message.chat.id}&text=-\n 𝗨𝗦𝗘𝗥 :  @{user} \n @QYQ_3 -''')
                 except NameError:
                     pass
             else:
