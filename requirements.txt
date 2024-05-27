@@ -1,4 +1,4 @@
 telebot
-instaloader
-pyrogram
-urlextract
+random
+time
+requests
