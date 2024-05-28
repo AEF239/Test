@@ -8,8 +8,11 @@ TOKEN = '6974068885:AAF1ri7vhih_x3eCaOOBNIfCtw-SLCZi7wY'
 bot = telebot.TeleBot(TOKEN)
 
 stop_flag = False
-checked_usernames = set()  # مجموعة للاحتفاظ باليوزرات التي تم التحقق منها
-FILENAME = 'checked_usernames.txt'  # اسم الملف لحفظ اليوزرات
+checked_usernames = set()
+FILENAME = 'checked_usernames.txt'
+
+# تعيين متغير لتحديد مدة التأخير بين دورات الصيد
+DELAY_BETWEEN_CYCLES = 5  # بالثواني
 
 def load_checked_usernames():
     global checked_usernames
@@ -24,11 +27,9 @@ def save_checked_username(username):
 @bot.message_handler(commands=['start'])
 def start(message):
     bot.send_message(message.chat.id, 'بدء صيد يوزرات بوتات ثلاثية...')
-
-    # ابدأ عملية الصيد مباشرة عند استلام رسالة /start
     global stop_flag
     stop_flag = False
-    load_checked_usernames()  # تحميل اليوزرات التي تم التحقق منها سابقاً
+    load_checked_usernames()
     start_hunting(message)
 
 @bot.message_handler(commands=['stop'])
@@ -42,10 +43,10 @@ def check_username(username):
     req = requests.get(url)
     if req.status_code == 200:
         if 'This username is not taken' in req.text:
-            return False  # اليوزر متاح
+            return False
         elif 'If you have <strong>Telegram</strong>' in req.text:
-            return True   # اليوزر محجوز من قبل مستخدم Telegram
-    return False  # اليوزر غير معروف أو متاح
+            return True
+    return False
 
 def start_hunting(message):
     global stop_flag
@@ -54,12 +55,11 @@ def start_hunting(message):
     
     while not stop_flag:
         try:
-            # توليد يوزر ثلاثي مع لاحقة "bot"
             while True:
                 username = ''.join(random.choices(alphabet, k=3)) + 'bot'
                 if username not in checked_usernames:
                     checked_usernames.add(username)
-                    save_checked_username(username)  # حفظ اليوزر في الملف
+                    save_checked_username(username)
                     break
             
             if check_username(username):
@@ -71,7 +71,9 @@ def start_hunting(message):
                 except Exception as e:
                     print(f"Error: {e}")
             j += 1
-            # إضافة تأخير قصير لجعل العملية أقل عبئًا على الخادم
+            
+            # تأخير لبضع ثوانٍ قبل بدء الدورة التالية
+            time.sleep(DELAY_BETWEEN_CYCLES)
         except Exception as e:
             print(f"Error: {e}")
 
