@@ -1,2 +1,8 @@
-telebot
+websocket
+ssl
+json
+gzip
 requests
+time
+random
+concurrent.futures
