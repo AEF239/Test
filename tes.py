@@ -33,7 +33,6 @@ os.system('clear')
 import time 
 print("مرحبا في اداة صنع حسابات تطبيق safeum")
 print("سوف تبدا الاداة في انشاء الحسابات بعد 5 ثوان ")
-time.sleep(5)
 
 
 ch='qwertyuioplkjhgfdsazxcvbnm'
